@@ -1,6 +1,6 @@
-# To run as is:
-
 npm install
+
+# To run as is:
 
 node server.js
 
@@ -9,6 +9,7 @@ Open localhost:9003
 
 # To make edits:
 
-Change code inside src folder then
+npm run gulp (automatically runs server.js, so make sure its not already running)
 
-npm run gulp
+Change code inside src folder or index.html then reload localhost:9003
+
