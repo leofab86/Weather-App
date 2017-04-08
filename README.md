@@ -1,13 +1,16 @@
-npm install
 
 # To run as is:
 
-node server.js
+npm install --production
+
+npm start
 
 Open localhost:9003
 
 
 # To make edits:
+
+npm install
 
 npm run gulp (automatically runs server.js, so make sure its not already running)
 

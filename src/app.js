@@ -1,31 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const cities = [
-	{city:'Boston', state:'MA'},
-	{city:'New York', state:'NY'},
-	{city:'Detroit', state:'MI'},
-	{city:'Providence', state:'RI'},
-	{city:'Houston', state:'Texas'},
-	{city:'Los Angeles', state:'CA'},
-];
+const cities = {
+	'Boston': {city:'Boston', state:'MA'},
+	'New York': {city:'New York', state:'NY'},
+	'Detroit': {city:'Detroit', state:'MI'},
+	'Providence': {city:'Providence', state:'RI'},
+	'Houston': {city:'Houston', state:'Texas'},
+	'Los Angeles': {city:'Los Angeles', state:'CA'},
+};
 
 class App extends React.Component {
 
 	state = {
-		selection: {city:'Boston', state:'MA'}
+		selection: cities['Boston']
 	}
 
 	selectCity = (event) => {
-		let value = event.target.value;
-		const cityArray = value.split(', ');
-		this.setState({selection:{city:cityArray[0], state:cityArray[1]}})
+		const city = event.target.value;
+		this.setState({selection:cities[city]})
 	}
 
-	getWeather = (city) => {
-		city.city = city.city.replace(/\s/g, "_");
+	getWeather = (cityObj) => {
+		const cityUrl = cityObj.city.replace(/\s/g, "_");
 		$.ajax({
-			url : `http://api.wunderground.com/api/c2abc6edde56df60/forecast10day/q/${city.state}/${city.city}.json`,
+			url : `http://api.wunderground.com/api/c2abc6edde56df60/forecast10day/q/${cityObj.state}/${cityUrl}.json`,
 			dataType : "jsonp",
 			success : function(parsed_json) {
 				console.log(parsed_json);
@@ -43,8 +42,9 @@ class App extends React.Component {
 				<br/>
 				<h3>Select City</h3>
 				<select className='form-control' onChange={this.selectCity}>
-					{cities.map(function(city, index) {
-						return( <option id={index} key={index}>{city.city}, {city.state}</option> )
+					{Object.keys(cities).map(function(city) {
+						const state = cities[city]['state'];
+						return( <option value={city} key={city}>{city}, {state}</option> )
 					}, this)}
 				</select>
 				<br/>
