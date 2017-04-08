@@ -1,3 +1,5 @@
 npm install
 
-node server.js
+npm run gulp
+
+Open localhost:9003
