@@ -8,3 +8,5 @@ app.get('/', (req, res) => {
 })
 .use(express.static(__dirname))
 .listen(9003);
+
+console.log('=============== Server running on localhost:9003 ==================')
